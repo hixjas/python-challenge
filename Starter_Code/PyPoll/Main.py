@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-"""PyPoll Homework Starter File."""
+
 
 # Import necessary modules
 import csv
@@ -7,13 +7,12 @@ import os
 
 # Files to load and output (update with correct file paths)
 file_to_load = os.path.join("PyPoll","Resources", "election_data.csv")  # Input file path
-file_to_output = os.path.join("analysis", "election_analysis.txt")  # Output file path
+file_to_output = os.path.join("PyPoll","analysis", "election_analysis.txt")  # Output file path
 
 # Initialize variables to track the election data
 total_votes = 0  # Track the total number of votes cast
 
 # Define lists and dictionaries to track candidate names and vote counts
-# Dictionary to store candidate names and their vote counts
 candidate_votes = {}
 
 # Winning Candidate and Winning Count Tracker
@@ -23,30 +22,45 @@ candidate_votes = {}
 with open(file_to_load) as election_data:
     reader = csv.reader(election_data)
 
-    # Skip the header row if there is one
-    next(reader, None)
+    # Skip the header row
+    header = next(reader)
 
-    # Loop through each row in the CSV file
+    # Loop through each row of the dataset and process it
     for row in reader:
-        total_votes += 1  # Increment the total vote count
-        candidate_name = row[2]  # Assume candidate name is in the third column (index 2)
 
-        # Increment the vote count for the candidate
+        # Print a loading indicator (for large datasets)
+        print(". ", end="")
+
+        # Increment the total vote count for each row
+        total_votes +=1
+
+        # Get the candidate's name from the row
+        candidate_name = row[2]
+
+        # If the candidate is not already in the candidate list, add them
         if candidate_name in candidate_votes:
             candidate_votes[candidate_name] += 1
         else:
             candidate_votes[candidate_name] = 1
 
-f = open("output.txt", "a")
-# Print the results
-print(f"Total Votes: {total_votes}", file=f)
-#print("\nCandidate Results:")
+        # Add a vote to the candidate's count
+summary = []
+summary.append("Election Results:\n")
+summary.append(f"\nTotal Votes: {total_votes}\n")
+
+# Calculate the percentage of votes for each candidate and add to the summary list
 for candidate, votes in candidate_votes.items():
     vote_percentage = (votes / total_votes) * 100
-    print(f"\nCandidate Results:","{candidate}: {vote_percentage:.2f}% ({votes} votes)", file=f)
+    summary.append(f"{candidate}: {vote_percentage:.2f}% ({votes} votes)\n")
 
-    # Find the candidate with the highest votes
+# Find the candidate with the highest votes
 winner = max(candidate_votes, key=candidate_votes.get)
-print(f"\nWinner: {winner} with {candidate_votes[winner]} votes", file=f)
+summary.append(f"\nWinner: {winner}")
 
-f.close()
+# Print the summary
+for line in summary:
+    print(line, end='')
+
+# Save the results to a text file
+with open(file_to_output, 'w') as file:
+    file.writelines(summary)

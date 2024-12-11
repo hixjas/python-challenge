@@ -13,7 +13,7 @@ file_to_output = os.path.join("analysis", "election_analysis.txt")  # Output fil
 total_votes = 0  # Track the total number of votes cast
 
 # Define lists and dictionaries to track candidate names and vote counts
-candidate_votes = {}
+
 
 # Winning Candidate and Winning Count Tracker
 
@@ -32,38 +32,16 @@ with open(file_to_load) as election_data:
         print(". ", end="")
 
         # Increment the total vote count for each row
-        total_votes +=1
+       
 
         # Get the candidate's name from the row
-        candidate_name = row[2]
+    
 
         # If the candidate is not already in the candidate list, add them
-        if candidate_name in candidate_votes:
-            candidate_votes[candidate_name] += 1
-        else:
-            candidate_votes[candidate_name] = 1
+       
 
         # Add a vote to the candidate's count
-summary = []
-summary.append("Election Results:\n")
-summary.append(f"\nTotal Votes: {total_votes}\n")
 
-for candidate, votes in candidate_votes.items():
-    vote_percentage = (votes / total_votes) * 100
-    summary.append(f"{candidate}: {vote_percentage:.2f}% ({votes} votes)\n")
-
-# Find the candidate with the highest votes
-winner = max(candidate_votes, key=candidate_votes.get)
-summary.append(f"\nWinner: {winner}")
-
-# Print the summary
-for line in summary:
-    print(line, end='')
-
-# Save the results to a text file
-output_file = 'voting_results.txt'  # Replace with your desired output file path
-with open(output_file, 'w') as file:
-    file.writelines(summary)
 
 
 # Open a text file to save the output
