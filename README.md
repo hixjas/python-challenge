@@ -17,6 +17,8 @@ The greatest increase in profits (date and amount) over the entire period
 
 The greatest decrease in profits (date and amount) over the entire period
 
+
+
 ![Screenshot 2024-12-10 at 11 13 47 PM](https://github.com/user-attachments/assets/b6836fe8-0c24-4f6c-8026-cfef2d61a99f)
 
 
@@ -36,5 +38,7 @@ The percentage of votes each candidate won
 The total number of votes each candidate won
 
 The winner of the election based on popular vote
+
+
 ![Screenshot 2024-12-10 at 11 07 41 PM](https://github.com/user-attachments/assets/cbbe5278-c5b0-4f14-bef2-228003ee4cdd)
 
